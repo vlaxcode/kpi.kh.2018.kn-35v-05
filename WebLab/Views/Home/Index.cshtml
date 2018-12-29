@@ -1,0 +1,42 @@
+﻿@{
+    ViewBag.Title = "Студент!Проверь свою удачу!";
+}
+
+<div class="wrap">
+    <div style="background: white; margin-top: 20%; border-radius: 25px; padding :10%">
+    <div class="mat-div">
+        <label for="first-name" class="mat-label">Имя</label>
+        <input type="text" class="mat-input" id="first-name">
+    </div>
+
+    <div class="mat-div">
+        <label for="first-name" class="mat-label">Курс</label>
+        <input type="text" class="mat-input" id="last-name">
+    </div>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        <script>
+            function GetMessage()
+            {
+                alert('Call ajax');
+                $.ajax({
+                    url: 'http://localhost:63793/Home/GetResult',
+                    type: 'GET',
+                    success: function (data) {
+
+                        $("#result").text(data);
+                        alert(data);
+                        var resultLink = document.getElementById('1');
+                        resultLink.hidden = false;
+                        resultLink.text = "Результат!";
+                        resultLink.href = data;
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        $('#result').text(jqXHR.responseText || textStatus);
+                    }
+                });
+            }
+        </script>
+        <button id="#getResultButton" onclick="GetMessage()">Результат</button>
+        <a id="1" hidden="true" href="https://google.com">Result</a>
+    </div>
+</div>
